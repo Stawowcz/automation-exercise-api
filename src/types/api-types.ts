@@ -9,7 +9,7 @@ export interface Product {
 
 export interface ProductsResponse {
   responseCode: number;
-  message: string
+  message: string;
   products: Product[];
 }
 

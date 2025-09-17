@@ -18,7 +18,13 @@ export class ProductsApi extends BaseApi {
     });
   }
 
-  async searchProduct(searchTerm: string) {
+  async searchProduct(searchTerm?: string) {
+    if (searchTerm === undefined) {
+      // brak parametru w ogóle
+      return this.postUrlEncoded(ApiEndpoints.PRODUCTS.SEARCH, {});
+    }
+
+    // parametr obecny (może być pusty string)
     return this.postUrlEncoded(ApiEndpoints.PRODUCTS.SEARCH, {
       search_product: searchTerm,
     });

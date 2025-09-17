@@ -3,7 +3,7 @@ import { APIRequestContext, expect } from "@playwright/test";
 
 export class BaseApi {
   protected readonly request: APIRequestContext;
-  protected readonly baseURL: string;
+  public readonly baseURL: string;
 
   constructor(request: APIRequestContext, baseURL: string) {
     this.request = request;
@@ -28,8 +28,42 @@ export class BaseApi {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      data: new URLSearchParams(params).toString(), // 👈 zamiana obiektu na key=value&key2=value2
+      data: new URLSearchParams(params).toString(),
     });
+    return response;
+  }
+
+  async postUrlEncoded2(endpoint: string, params: Record<string, string>) {
+    return this.request.post(`${this.baseURL}${endpoint}`, {
+      form: params,
+    });
+  }
+
+  async putUrlEncoded2(endpoint: string, params: Record<string, string>) {
+    return this.request.put(`${this.baseURL}${endpoint}`, {
+      form: params,
+    });
+  }
+
+  async deleteUrlEncoded2(endpoint: string) {
+    return this.request.delete(`${this.baseURL}${endpoint}`);
+  }
+
+  async deleteUserUrlEncoded2(
+    endpoint: string,
+    params: Record<string, string>,
+  ) {
+    return this.request.delete(`${this.baseURL}${endpoint}`, {
+      form: params,
+    });
+  }
+
+  async getWithParams(endpoint: string, params: Record<string, string>) {
+    const query = new URLSearchParams(params).toString();
+    const url = `${this.baseURL}${endpoint}?${query}`;
+
+    const response = await this.request.get(url);
+    expect(response.ok()).toBeTruthy();
     return response;
   }
 }

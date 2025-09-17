@@ -7,4 +7,13 @@ export const ApiEndpoints = {
   BRANDS: {
     LIST: "/brandsList",
   },
+  LOGIN: {
+    VERIFY: "/verifyLogin",
+  },
+  USERS: {
+    CREATE: "/createAccount",
+    DELETE: "/deleteAccount",
+    UPDATE: "/updateAccount",
+    DETAILS: "/getUserDetailByEmail",
+  },
 };

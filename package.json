@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Stawowcz/automation-exercise-api#readme",
   "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.3.1"
   }

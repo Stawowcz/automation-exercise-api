@@ -1,6 +1,6 @@
 import { BaseApi } from "./base-api";
 import { APIRequestContext } from "@playwright/test";
-import { ApiEndpoints } from "../constants/api-endpoints";
+import { ApiEndpoints } from "../constants/endpoints/api-endpoints";
 
 export class BrandsApi extends BaseApi {
   constructor(request: APIRequestContext) {

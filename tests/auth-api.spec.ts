@@ -11,10 +11,7 @@ test.describe("Brands API", () => {
       process.env.USER!,
       process.env.PASSWORD!,
     );
-
     expect.soft(response.status()).toBe(200);
-    const body = await response.json();
-    console.log(body);
   });
 });
 
@@ -57,7 +54,6 @@ test("should register new user", async ({ request }) => {
   expect(response.status()).toBe(200);
 
   const body = await response.json();
-  console.log(body);
 
   expect(body.responseCode).toBe(201);
   expect(body.message).toBe(CommonConstants.USER_CREATED);
@@ -90,9 +86,7 @@ test("should create, update, delete user", async ({ request }) => {
   expect.soft(bodyDelete.message).toBe(CommonConstants.ACCOUNT_DELETED);
 });
 
-test.only("should create, get details, update and delete user", async ({
-  request,
-}) => {
+test("should create, get details", async ({ request }) => {
   const registerApi = new RegisterApi(request);
 
   const responseCreate = await registerApi.registerUser(RegisterData);
@@ -107,7 +101,6 @@ test.only("should create, get details, update and delete user", async ({
   expect.soft(responseGet.status()).toBe(200);
 
   const bodyGet = await responseGet.json();
-  console.log("User detail:", bodyGet);
 
   expect.soft(bodyGet.responseCode).toBe(200);
   expect.soft(bodyGet.user).toHaveProperty("id");

@@ -1,7 +1,7 @@
 // src/api/products-api.ts
 import { BaseApi } from "./base-api";
 import { APIRequestContext } from "@playwright/test";
-import { ApiEndpoints } from "../constants/api-endpoints";
+import { ApiEndpoints } from "../constants/endpoints/api-endpoints";
 
 export class ProductsApi extends BaseApi {
   constructor(request: APIRequestContext) {
@@ -20,12 +20,9 @@ export class ProductsApi extends BaseApi {
 
   async searchProduct(searchTerm?: string) {
     if (searchTerm === undefined) {
-      // brak parametru w ogóle
-      return this.postUrlEncoded(ApiEndpoints.PRODUCTS.SEARCH, {});
+      return this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {});
     }
-
-    // parametr obecny (może być pusty string)
-    return this.postUrlEncoded(ApiEndpoints.PRODUCTS.SEARCH, {
+    return this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {
       search_product: searchTerm,
     });
   }

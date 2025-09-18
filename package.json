@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "api:chromium": "npx playwright test --project='chromium'",
+    "api:webkit": "npx playwright test --project='webkit'",
+    "api:firefox": "npx playwright test --project='firefox'",
+    "api:all": "npx playwright test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stawowcz/automation-exercise-api.git"

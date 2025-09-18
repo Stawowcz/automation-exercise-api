@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { BrandsResponse } from "@typings/api-types";
 import { BrandsApi } from "@api/brands-api";
-import { CommonConstants } from "@constants/common";
 import { REQUIRED_BRAND_FIELDS } from "@constants/brand/brand-fields";
 import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 

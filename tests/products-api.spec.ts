@@ -1,11 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "@api/products-api";
-import { CommonConstants } from "@constants/common/common-fields";
 import { REQUIRED_PRODUCT_FIELDS } from "@constants/product/product-fields";
 import { REQUIRED_CATEGORY_FIELDS } from "@constants/category/category-fields";
 import { ProductsResponse } from "@typings/api-types";
 import { CommonData } from "@utils/user-data";
-import { REQUIRED_BRAND_FIELDS } from "@constants/brand";
 import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 
 test.describe("Products API", () => {

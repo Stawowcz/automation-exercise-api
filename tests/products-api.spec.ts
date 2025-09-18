@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { ProductsApi } from "../src/api/products-api";
-import { CommonConstants } from "../src/constants/common/common-constants";
-import { REQUIRED_PRODUCT_FIELDS } from "../src/constants/product/product-fields";
-import { REQUIRED_CATEGORY_FIELDS } from "../src/constants/category/category-fields";
-import { ProductsResponse } from "../src/types/api-types";
-import { CommonData } from "../src/data/common-data";
+import { ProductsApi } from "@api/products-api";
+import { CommonConstants } from "@constants/common/common-constants";
+import { REQUIRED_PRODUCT_FIELDS } from "@constants/product/product-fields";
+import { REQUIRED_CATEGORY_FIELDS } from "@constants/category/category-fields";
+import { ProductsResponse } from "@typings/api-types";
+import { CommonData } from "@data/common-data";
 
 test.describe("Products API", () => {
   test("should return all products list", async ({ request }) => {

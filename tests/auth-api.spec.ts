@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { CommonConstants } from "../src/constants/common/common-constants";
-import { LoginApi } from "../src/api/login-api";
-import { RegisterData, UpdatedData } from "../src/data/common-data";
-import { RegisterApi } from "../src/api/register-api";
+import { CommonConstants } from "@constants/common/common-constants";
+import { LoginApi } from "@api/login-api";
+import { RegisterData, UpdatedData } from "@data/common-data";
+import { RegisterApi } from "@api/register-api";
 
 test.describe("Brands API", () => {
   test("should login", async ({ request }) => {

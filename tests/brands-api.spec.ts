@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { BrandsResponse } from "../src/types/api-types";
-import { BrandsApi } from "../src/api/brands-api";
-import { CommonConstants } from "../src/constants/common/common-constants";
-import { REQUIRED_BRAND_FIELDS } from "../src/constants/brand/brand-fields";
+import { BrandsResponse } from "@typings/api-types";
+import { BrandsApi } from "@api/brands-api";
+import { CommonConstants } from "@constants/common";
+import { REQUIRED_BRAND_FIELDS } from "@constants/brand/brand-fields";
 
 test.describe("Brands API", () => {
   test("should return all brands", async ({ request }) => {

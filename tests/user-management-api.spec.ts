@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { RegisterData, UpdatedData } from "@utils/user-data";
 import { RegisterApi } from "@api/register-api";
-import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
+import { API_RESPONSE_MESSAGES } from "@utils/api-messages";
 
 test.describe("User Management API", () => {
   test("should register new user", async ({ request }) => {
@@ -14,7 +14,7 @@ test.describe("User Management API", () => {
     const body = await response.json();
 
     expect(body.responseCode).toBe(201);
-    expect(body.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
+    expect(body.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
   });
 
   test("should create, update, delete user", async ({ request }) => {
@@ -24,7 +24,7 @@ test.describe("User Management API", () => {
     expect.soft(responseCreate.status()).toBe(200);
     const bodyCreate = await responseCreate.json();
     expect.soft(bodyCreate.responseCode).toBe(201);
-    expect.soft(bodyCreate.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
+    expect.soft(bodyCreate.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
 
     const responseUpdate = await registerApi.updateUser({
       ...UpdatedData,
@@ -33,7 +33,7 @@ test.describe("User Management API", () => {
     });
     const bodyUpdate = await responseUpdate.json();
     expect.soft(bodyUpdate.responseCode).toBe(200);
-    expect(bodyUpdate.message).toBe(REQUIRED_AUTH_FIELDS.USER_UPDATED);
+    expect(bodyUpdate.message).toBe(API_RESPONSE_MESSAGES.USER_UPDATED);
 
     const responseDelete = await registerApi.deleteUser(
       RegisterData.email,
@@ -41,7 +41,7 @@ test.describe("User Management API", () => {
     );
     const bodyDelete = await responseDelete.json();
     expect.soft(bodyDelete.responseCode).toBe(200);
-    expect.soft(bodyDelete.message).toBe(REQUIRED_AUTH_FIELDS.ACCOUNT_DELETED);
+    expect.soft(bodyDelete.message).toBe(API_RESPONSE_MESSAGES.ACCOUNT_DELETED);
   });
 
   test("should get details of user", async ({ request }) => {
@@ -51,7 +51,7 @@ test.describe("User Management API", () => {
     expect.soft(responseCreate.status()).toBe(200);
     const bodyCreate = await responseCreate.json();
     expect.soft(bodyCreate.responseCode).toBe(201);
-    expect.soft(bodyCreate.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
+    expect.soft(bodyCreate.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
 
     const responseGet = await registerApi.getUserDetailByEmail(
       RegisterData.email,

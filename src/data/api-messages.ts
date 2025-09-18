@@ -1,18 +1,12 @@
-export const REQUIRED_AUTH_FIELDS = {
-  //auth
+export const API_RESPONSE_MESSAGES = {
   ERROR_MESSAGE_METHOD_NOT_SUPPORTED: "This request method is not supported.",
-
-  // auth
   USER_NOT_FOUND: "User not found!",
-  // auth
   EMAIL_PASSWORD_MISSING:
     "Bad request, email or password parameter is missing in POST request.",
-
-  // auth
   USER_CREATED: "User created!",
-
-  // auth
   ACCOUNT_DELETED: "Account deleted!",
-  // auth
   USER_UPDATED: "User updated!",
+  METHOD_NOT_SUPPORTED: "This request method is not supported.",
+  SEARCH_PRODUCT_MISSING:
+    "Bad request, search_product parameter is missing in POST request.",
 } as const;

@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "@api/products-api";
-import { REQUIRED_PRODUCT_FIELDS } from "@constants/product/product-fields";
-import { REQUIRED_CATEGORY_FIELDS } from "@constants/category/category-fields";
 import { ProductsResponse } from "@typings/api-types";
 import { CommonData } from "@utils/user-data";
-import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
+import { API_RESPONSE_MESSAGES } from "@utils/api-messages";
+import { API_PROPERTIES } from "@utils/api-properties";
+import { API_VALUES } from "@utils/api-values";
 
 test.describe("Products API", () => {
   test("should return all products list", async ({ request }) => {
@@ -22,18 +22,14 @@ test.describe("Products API", () => {
       .toContain("text/html; charset=utf-8");
 
     for (const product of body.products) {
-      expect.soft(product).toHaveProperty(REQUIRED_PRODUCT_FIELDS.ID);
-      expect.soft(product).toHaveProperty(REQUIRED_PRODUCT_FIELDS.NAME);
-      expect.soft(product).toHaveProperty(REQUIRED_PRODUCT_FIELDS.PRICE);
-      expect.soft(product).toHaveProperty(REQUIRED_PRODUCT_FIELDS.BRAND);
-      expect.soft(product).toHaveProperty(REQUIRED_PRODUCT_FIELDS.CATEGORY);
+      expect.soft(product).toHaveProperty(API_PROPERTIES.ID);
+      expect.soft(product).toHaveProperty(API_PROPERTIES.NAME);
+      expect.soft(product).toHaveProperty(API_PROPERTIES.PRICE);
+      expect.soft(product).toHaveProperty(API_PROPERTIES.BRAND);
+      expect.soft(product).toHaveProperty(API_PROPERTIES.CATEGORY);
 
-      expect
-        .soft(product.category)
-        .toHaveProperty(REQUIRED_CATEGORY_FIELDS.CATEGORY);
-      expect
-        .soft(product.category)
-        .toHaveProperty(REQUIRED_CATEGORY_FIELDS.USERTYPE);
+      expect.soft(product.category).toHaveProperty(API_PROPERTIES.CATEGORY);
+      expect.soft(product.category).toHaveProperty(API_PROPERTIES.USERTYPE);
     }
   });
 
@@ -47,7 +43,7 @@ test.describe("Products API", () => {
     expect.soft(body.responseCode).toBe(405);
     expect
       .soft(body.message)
-      .toBe(REQUIRED_AUTH_FIELDS.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
+      .toBe(API_RESPONSE_MESSAGES.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
   });
 
   test("should return searched products by name", async ({ request }) => {
@@ -65,9 +61,7 @@ test.describe("Products API", () => {
     expect.soft(body.products.length).toBe(1);
     expect.soft(body.products[0].id).toBe(1);
     expect.soft(body.products[0].name).toBe(CommonData.SEARCH_EXAMPLE_NAME);
-    expect
-      .soft(body.products[0].brand)
-      .toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_EXAMPLE_BRAND);
+    expect.soft(body.products[0].brand).toBe(API_VALUES.SEARCH_BRAND);
     expect.soft(body.products[0].category).toBeDefined();
   });
 
@@ -82,6 +76,6 @@ test.describe("Products API", () => {
     expect.soft(body.responseCode).toBe(400);
     expect
       .soft(body.message)
-      .toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_PRODUCT_MISSING);
+      .toBe(API_RESPONSE_MESSAGES.SEARCH_PRODUCT_MISSING);
   });
 });

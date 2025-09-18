@@ -71,5 +71,3 @@ npm run api:all
 - API tests are based on the public **Automation Exercise API**.
 - Some endpoints (e.g., `createAccount`) require unique test data — this is generated dynamically using Faker.
 - The `.env` file is required for login tests.
-
-

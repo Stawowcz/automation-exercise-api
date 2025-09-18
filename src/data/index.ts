@@ -1,1 +1,1 @@
-export * from "./common-data";
+export * from "./user-data";

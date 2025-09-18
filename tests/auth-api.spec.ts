@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { CommonConstants } from "@constants/common/common-fields";
 import { LoginApi } from "@api/login-api";
-import { RegisterData, UpdatedData } from "@data/common-data";
+import { RegisterData, UpdatedData } from "@utils/user-data";
 import { RegisterApi } from "@api/register-api";
 import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 

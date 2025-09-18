@@ -1,15 +1,18 @@
-export const CommonConstants = {
-  EXPECTED_COUNT: 34,
+export const REQUIRED_AUTH_FIELDS = {
+  //auth
   ERROR_MESSAGE_METHOD_NOT_SUPPORTED: "This request method is not supported.",
-  SEARCH_EXAMPLE_ID: 1,
-  SEARCH_EXAMPLE_BRAND: "Polo",
+
+  // auth
   USER_NOT_FOUND: "User not found!",
+  // auth
   EMAIL_PASSWORD_MISSING:
     "Bad request, email or password parameter is missing in POST request.",
-  METHOD_NOT_SUPPORTED: "This request method is not supported.",
+  
+  // auth
   USER_CREATED: "User created!",
-  SEARCH_PRODUCT_MISSING:
-    "Bad request, search_product parameter is missing in POST request.",
+
+      // auth
   ACCOUNT_DELETED: "Account deleted!",
+  // auth
   USER_UPDATED: "User updated!",
 } as const;

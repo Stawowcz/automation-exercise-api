@@ -3,6 +3,7 @@ import { BrandsResponse } from "@typings/api-types";
 import { BrandsApi } from "@api/brands-api";
 import { CommonConstants } from "@constants/common";
 import { REQUIRED_BRAND_FIELDS } from "@constants/brand/brand-fields";
+import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 
 test.describe("Brands API", () => {
   test("should return all brands", async ({ request }) => {
@@ -14,7 +15,7 @@ test.describe("Brands API", () => {
       .toContain("text/html; charset=utf-8");
     const body: BrandsResponse = await response.json();
     expect.soft(body.responseCode).toBe(200);
-    expect.soft(body.brands).toHaveLength(CommonConstants.EXPECTED_COUNT);
+    expect.soft(body.brands).toHaveLength(REQUIRED_BRAND_FIELDS.EXPECTED_COUNT);
     for (const brand of body.brands) {
       expect.soft(brand).toHaveProperty(REQUIRED_BRAND_FIELDS.ID);
       expect.soft(brand).toHaveProperty(REQUIRED_BRAND_FIELDS.BRAND);
@@ -29,6 +30,6 @@ test.describe("Brands API", () => {
     expect.soft(body.responseCode).toBe(405);
     expect
       .soft(body.message)
-      .toBe(CommonConstants.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
+      .toBe(REQUIRED_AUTH_FIELDS.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
   });
 });

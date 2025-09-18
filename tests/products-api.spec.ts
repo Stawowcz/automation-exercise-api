@@ -1,10 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "@api/products-api";
-import { CommonConstants } from "@constants/common/common-constants";
+import { CommonConstants } from "@constants/common/common-fields";
 import { REQUIRED_PRODUCT_FIELDS } from "@constants/product/product-fields";
 import { REQUIRED_CATEGORY_FIELDS } from "@constants/category/category-fields";
 import { ProductsResponse } from "@typings/api-types";
 import { CommonData } from "@data/common-data";
+import { REQUIRED_BRAND_FIELDS } from "@constants/brand";
+import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 
 test.describe("Products API", () => {
   test("should return all products list", async ({ request }) => {
@@ -47,7 +49,7 @@ test.describe("Products API", () => {
     expect.soft(body.responseCode).toBe(405);
     expect
       .soft(body.message)
-      .toBe(CommonConstants.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
+      .toBe(REQUIRED_AUTH_FIELDS.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
   });
 
   test("should return searched products by name", async ({ request }) => {
@@ -67,7 +69,7 @@ test.describe("Products API", () => {
     expect.soft(body.products[0].name).toBe(CommonData.SEARCH_EXAMPLE_NAME);
     expect
       .soft(body.products[0].brand)
-      .toBe(CommonConstants.SEARCH_EXAMPLE_BRAND);
+      .toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_EXAMPLE_BRAND);
     expect.soft(body.products[0].category).toBeDefined();
   });
 
@@ -80,6 +82,6 @@ test.describe("Products API", () => {
     const body = await response.json();
 
     expect.soft(body.responseCode).toBe(400);
-    expect.soft(body.message).toBe(CommonConstants.SEARCH_PRODUCT_MISSING);
+    expect.soft(body.message).toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_PRODUCT_MISSING);
   });
 });

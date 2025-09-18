@@ -4,4 +4,7 @@ export const REQUIRED_PRODUCT_FIELDS = {
   PRICE: "price",
   BRAND: "brand",
   CATEGORY: "category",
+  SEARCH_PRODUCT_MISSING:
+    "Bad request, search_product parameter is missing in POST request.",
+  SEARCH_EXAMPLE_BRAND: "Polo",
 } as const;

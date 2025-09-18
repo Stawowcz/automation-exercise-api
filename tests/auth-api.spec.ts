@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { CommonConstants } from "@constants/common/common-constants";
+import { CommonConstants } from "@constants/common/common-fields";
 import { LoginApi } from "@api/login-api";
 import { RegisterData, UpdatedData } from "@data/common-data";
 import { RegisterApi } from "@api/register-api";
+import { REQUIRED_AUTH_FIELDS } from "@constants/auth/auth-fields";
 
 test.describe("Brands API", () => {
   test("should login", async ({ request }) => {
@@ -23,7 +24,7 @@ test("should not login with incorrect credential", async ({ request }) => {
   );
   const body = await response.json();
   expect.soft(body.responseCode).toBe(404);
-  expect.soft(body.message).toBe(CommonConstants.USER_NOT_FOUND);
+  expect.soft(body.message).toBe(REQUIRED_AUTH_FIELDS.USER_NOT_FOUND);
 });
 
 test("should not login without email", async ({ request }) => {
@@ -33,7 +34,7 @@ test("should not login without email", async ({ request }) => {
   );
   const body = await response.json();
   expect.soft(body.responseCode).toBe(400);
-  expect.soft(body.message).toBe(CommonConstants.EMAIL_PASSWORD_MISSING);
+  expect.soft(body.message).toBe(REQUIRED_AUTH_FIELDS.EMAIL_PASSWORD_MISSING);
 });
 
 test("should delete login", async ({ request }) => {
@@ -43,7 +44,7 @@ test("should delete login", async ({ request }) => {
   expect.soft(body.responseCode).toBe(405);
   expect
     .soft(body.message)
-    .toBe(CommonConstants.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
+    .toBe(REQUIRED_AUTH_FIELDS.ERROR_MESSAGE_METHOD_NOT_SUPPORTED);
 });
 
 test("should register new user", async ({ request }) => {
@@ -56,7 +57,7 @@ test("should register new user", async ({ request }) => {
   const body = await response.json();
 
   expect(body.responseCode).toBe(201);
-  expect(body.message).toBe(CommonConstants.USER_CREATED);
+  expect(body.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
 });
 
 test("should create, update, delete user", async ({ request }) => {
@@ -66,7 +67,7 @@ test("should create, update, delete user", async ({ request }) => {
   expect.soft(responseCreate.status()).toBe(200);
   const bodyCreate = await responseCreate.json();
   expect.soft(bodyCreate.responseCode).toBe(201);
-  expect.soft(bodyCreate.message).toBe(CommonConstants.USER_CREATED);
+  expect.soft(bodyCreate.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
 
   const responseUpdate = await registerApi.updateUser({
     ...UpdatedData,
@@ -75,7 +76,7 @@ test("should create, update, delete user", async ({ request }) => {
   });
   const bodyUpdate = await responseUpdate.json();
   expect.soft(bodyUpdate.responseCode).toBe(200);
-  expect(bodyUpdate.message).toBe(CommonConstants.USER_UPDATED);
+  expect(bodyUpdate.message).toBe(REQUIRED_AUTH_FIELDS.USER_UPDATED);
 
   const responseDelete = await registerApi.deleteUser(
     RegisterData.email,
@@ -83,7 +84,7 @@ test("should create, update, delete user", async ({ request }) => {
   );
   const bodyDelete = await responseDelete.json();
   expect.soft(bodyDelete.responseCode).toBe(200);
-  expect.soft(bodyDelete.message).toBe(CommonConstants.ACCOUNT_DELETED);
+  expect.soft(bodyDelete.message).toBe(REQUIRED_AUTH_FIELDS.ACCOUNT_DELETED);
 });
 
 test("should create, get details", async ({ request }) => {
@@ -93,7 +94,7 @@ test("should create, get details", async ({ request }) => {
   expect.soft(responseCreate.status()).toBe(200);
   const bodyCreate = await responseCreate.json();
   expect.soft(bodyCreate.responseCode).toBe(201);
-  expect.soft(bodyCreate.message).toBe(CommonConstants.USER_CREATED);
+  expect.soft(bodyCreate.message).toBe(REQUIRED_AUTH_FIELDS.USER_CREATED);
 
   const responseGet = await registerApi.getUserDetailByEmail(
     RegisterData.email,

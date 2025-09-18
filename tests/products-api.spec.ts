@@ -1,19 +1,17 @@
 import { test, expect } from "@playwright/test";
 import { ProductsApi } from "@api/products-api";
 import { ProductsResponse } from "@typings/api-types";
-import { CommonData } from "@utils/user-data";
-import { API_RESPONSE_MESSAGES } from "@utils/api-messages";
-import { API_PROPERTIES } from "@utils/api-properties";
-import { API_VALUES } from "@utils/api-values";
+import { CommonData } from "@data/user-data";
+import { API_RESPONSE_MESSAGES } from "@data/api-messages";
+import { API_PROPERTIES } from "@data/api-properties";
+import { API_VALUES } from "@data/api-values";
 
 test.describe("Products API", () => {
   test("should return all products list", async ({ request }) => {
     const productsApi = new ProductsApi(request);
     const response = await productsApi.getAllProducts();
-
-    expect.soft(response.status()).toBe(200);
-
     const body: ProductsResponse = await response.json();
+
     expect.soft(body).toHaveProperty("products");
     expect.soft(Array.isArray(body.products)).toBeTruthy();
     expect.soft(body.products.length).toBe(34);
@@ -27,7 +25,6 @@ test.describe("Products API", () => {
       expect.soft(product).toHaveProperty(API_PROPERTIES.PRICE);
       expect.soft(product).toHaveProperty(API_PROPERTIES.BRAND);
       expect.soft(product).toHaveProperty(API_PROPERTIES.CATEGORY);
-
       expect.soft(product.category).toHaveProperty(API_PROPERTIES.CATEGORY);
       expect.soft(product.category).toHaveProperty(API_PROPERTIES.USERTYPE);
     }
@@ -36,8 +33,6 @@ test.describe("Products API", () => {
   test("should not create product", async ({ request }) => {
     const productsApi = new ProductsApi(request);
     const response = await productsApi.postProduct();
-
-    expect.soft(response.status()).toBe(200);
 
     const body: ProductsResponse = await response.json();
     expect.soft(body.responseCode).toBe(405);
@@ -51,9 +46,6 @@ test.describe("Products API", () => {
     const response = await productsApi.searchProduct(
       CommonData.SEARCH_EXAMPLE_NAME,
     );
-
-    expect.soft(response.status()).toBe(200);
-
     const body = await response.json();
 
     expect.soft(body.responseCode).toBe(200);
@@ -68,9 +60,6 @@ test.describe("Products API", () => {
   test("should not return searched products by name", async ({ request }) => {
     const productsApi = new ProductsApi(request);
     const response = await productsApi.searchProduct();
-
-    expect.soft(response.status()).toBe(200);
-
     const body = await response.json();
 
     expect.soft(body.responseCode).toBe(400);

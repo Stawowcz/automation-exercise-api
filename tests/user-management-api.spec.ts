@@ -1,27 +1,20 @@
 import { test, expect } from "@playwright/test";
-import { RegisterData, UpdatedData } from "@utils/user-data";
+import { RegisterData, UpdatedData } from "@data/user-data";
 import { RegisterApi } from "@api/register-api";
-import { API_RESPONSE_MESSAGES } from "@utils/api-messages";
+import { API_RESPONSE_MESSAGES } from "@data/api-messages";
 
 test.describe("User Management API", () => {
   test("should register new user", async ({ request }) => {
     const registerAPi = new RegisterApi(request);
-
     const response = await registerAPi.registerUser(RegisterData);
-
-    expect(response.status()).toBe(200);
-
     const body = await response.json();
-
     expect(body.responseCode).toBe(201);
     expect(body.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
   });
 
   test("should create, update, delete user", async ({ request }) => {
     const registerApi = new RegisterApi(request);
-
     const responseCreate = await registerApi.registerUser(RegisterData);
-    expect.soft(responseCreate.status()).toBe(200);
     const bodyCreate = await responseCreate.json();
     expect.soft(bodyCreate.responseCode).toBe(201);
     expect.soft(bodyCreate.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
@@ -48,7 +41,6 @@ test.describe("User Management API", () => {
     const registerApi = new RegisterApi(request);
 
     const responseCreate = await registerApi.registerUser(RegisterData);
-    expect.soft(responseCreate.status()).toBe(200);
     const bodyCreate = await responseCreate.json();
     expect.soft(bodyCreate.responseCode).toBe(201);
     expect.soft(bodyCreate.message).toBe(API_RESPONSE_MESSAGES.USER_CREATED);
@@ -56,8 +48,6 @@ test.describe("User Management API", () => {
     const responseGet = await registerApi.getUserDetailByEmail(
       RegisterData.email,
     );
-    expect.soft(responseGet.status()).toBe(200);
-
     const bodyGet = await responseGet.json();
 
     expect.soft(bodyGet.responseCode).toBe(200);

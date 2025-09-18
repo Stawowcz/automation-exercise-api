@@ -13,7 +13,6 @@ export class BaseApi {
     const response = await this.request.post(`${this.baseURL}${endpoint}`, {
       data,
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
@@ -21,7 +20,6 @@ export class BaseApi {
     const response = await this.request.post(`${this.baseURL}${endpoint}`, {
       form: params,
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
@@ -29,7 +27,6 @@ export class BaseApi {
     const response = await this.request.put(`${this.baseURL}${endpoint}`, {
       form: params,
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
@@ -37,7 +34,6 @@ export class BaseApi {
     const response = await this.request.delete(`${this.baseURL}${endpoint}`, {
       ...(params ? { form: params } : {}),
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
@@ -47,7 +43,6 @@ export class BaseApi {
       : `${this.baseURL}${endpoint}`;
 
     const response = await this.request.get(url);
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 }

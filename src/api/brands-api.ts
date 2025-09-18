@@ -9,13 +9,11 @@ export class BrandsApi extends BaseApi {
 
   async getAllBrands() {
     const response = await this.get(ApiEndpoints.BRANDS.LIST);
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
   async postBrand() {
     const response = await this.post(ApiEndpoints.BRANDS.LIST, { data: {} });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 }

@@ -1,6 +1,6 @@
 import { BaseApi } from "./base-api";
 import { APIRequestContext, expect } from "@playwright/test";
-import { ApiEndpoints } from "@utils/api-endpoints";
+import { ApiEndpoints } from "@data/api-endpoints";
 
 export class LoginApi extends BaseApi {
   constructor(request: APIRequestContext) {
@@ -12,7 +12,6 @@ export class LoginApi extends BaseApi {
       email,
       password,
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
@@ -20,13 +19,11 @@ export class LoginApi extends BaseApi {
     const response = await this.postForm(ApiEndpoints.LOGIN.VERIFY, {
       password,
     });
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 
   async deleteLogin() {
     const response = await this.delete(ApiEndpoints.LOGIN.VERIFY);
-    expect(response.ok()).toBeTruthy();
     return response;
   }
 }

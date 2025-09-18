@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { LoginApi } from "@api/login-api";
-import { API_RESPONSE_MESSAGES } from "@utils/api-messages";
+import { API_RESPONSE_MESSAGES } from "@data/api-messages";
+import { env } from "../src/config/env";
 
 test.describe("Auth API", () => {
   test("should login", async ({ request }) => {
     const loginApi = new LoginApi(request);
     const response = await loginApi.verifyLogin(
-      process.env.USER!,
-      process.env.PASSWORD!,
+      env.USER,
+      env.PASSWORD,
     );
     expect.soft(response.status()).toBe(200);
   });
@@ -15,8 +16,8 @@ test.describe("Auth API", () => {
   test("should not login with incorrect credential", async ({ request }) => {
     const loginApi = new LoginApi(request);
     const response = await loginApi.verifyLogin(
-      process.env.INCORRECT_USER!,
-      process.env.INCORRECT_PASSWORD!,
+      env.INCORRECT_USER,
+      env.INCORRECT_PASSWORD,
     );
     const body = await response.json();
     expect.soft(body.responseCode).toBe(404);
@@ -26,7 +27,7 @@ test.describe("Auth API", () => {
   test("should not login without email", async ({ request }) => {
     const loginApi = new LoginApi(request);
     const response = await loginApi.verifyLoginNoEmail(
-      process.env.INCORRECT_PASSWORD!,
+      env.INCORRECT_PASSWORD,
     );
     const body = await response.json();
     expect.soft(body.responseCode).toBe(400);

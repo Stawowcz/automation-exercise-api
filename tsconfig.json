@@ -16,11 +16,10 @@
       "@constants": ["src/constants"],
       "@constants/*": ["src/constants/*"],
 
-      "@utils": ["src/data"],
-      "@utils/*": ["src/data/*"],
+      "@data": ["src/data"],
+      "@data/*": ["src/data/*"],
 
       "@typings/*": ["src/types/*"],
-      "@data/*": ["src/data/*"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "playwright.config.ts"]

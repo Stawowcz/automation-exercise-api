@@ -1,6 +1,6 @@
 // src/api/products-api.ts
 import { BaseApi } from "./base-api";
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { ApiEndpoints } from "@constants/endpoints/api-endpoints";
 
 export class ProductsApi extends BaseApi {
@@ -9,21 +9,29 @@ export class ProductsApi extends BaseApi {
   }
 
   async getAllProducts() {
-    return this.get(ApiEndpoints.PRODUCTS.LIST);
+    const response = await this.get(ApiEndpoints.PRODUCTS.LIST);
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async postProduct() {
-    return this.post(ApiEndpoints.PRODUCTS.LIST, {
+    const response = await this.post(ApiEndpoints.PRODUCTS.LIST, {
       data: {},
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async searchProduct(searchTerm?: string) {
     if (searchTerm === undefined) {
-      return this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {});
+      const response = await this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {});
+      expect(response.ok()).toBeTruthy();
+      return response;
     }
-    return this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {
+    const response = await this.postForm(ApiEndpoints.PRODUCTS.SEARCH, {
       search_product: searchTerm,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 }

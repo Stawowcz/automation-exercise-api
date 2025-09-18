@@ -1,5 +1,5 @@
 import { BaseApi } from "./base-api";
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { ApiEndpoints } from "@constants/endpoints/api-endpoints";
 
 export class LoginApi extends BaseApi {
@@ -8,19 +8,25 @@ export class LoginApi extends BaseApi {
   }
 
   async verifyLogin(email: string, password: string) {
-    return this.postForm(ApiEndpoints.LOGIN.VERIFY, {
+    const response = await this.postForm(ApiEndpoints.LOGIN.VERIFY, {
       email,
       password,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async verifyLoginNoEmail(password: string) {
-    return this.postForm(ApiEndpoints.LOGIN.VERIFY, {
+    const response = await this.postForm(ApiEndpoints.LOGIN.VERIFY, {
       password,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async deleteLogin() {
-    return this.delete(ApiEndpoints.LOGIN.VERIFY);
+    const response = await this.delete(ApiEndpoints.LOGIN.VERIFY);
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 }

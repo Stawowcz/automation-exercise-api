@@ -13,19 +13,24 @@ export class BaseApi {
     const response = await this.request.post(`${this.baseURL}${endpoint}`, {
       data,
     });
+    expect(response.ok()).toBeTruthy();
     return response;
   }
 
   async postForm(endpoint: string, params: Record<string, string>) {
-    return this.request.post(`${this.baseURL}${endpoint}`, {
+    const response = await this.request.post(`${this.baseURL}${endpoint}`, {
       form: params,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async putForm(endpoint: string, params: Record<string, string>) {
-    return this.request.put(`${this.baseURL}${endpoint}`, {
+    const response = await this.request.put(`${this.baseURL}${endpoint}`, {
       form: params,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async delete(endpoint: string, params?: Record<string, string>) {
@@ -37,12 +42,12 @@ export class BaseApi {
   }
 
   async get(endpoint: string, params?: Record<string, string>) {
-  const url = params
-    ? `${this.baseURL}${endpoint}?${new URLSearchParams(params).toString()}`
-    : `${this.baseURL}${endpoint}`;
+    const url = params
+      ? `${this.baseURL}${endpoint}?${new URLSearchParams(params).toString()}`
+      : `${this.baseURL}${endpoint}`;
 
-  const response = await this.request.get(url);
-  expect(response.ok()).toBeTruthy();
-  return response;
-}
+    const response = await this.request.get(url);
+    expect(response.ok()).toBeTruthy();
+    return response;
+  }
 }

@@ -1,5 +1,5 @@
 import { BaseApi } from "./base-api";
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { ApiEndpoints } from "@constants/endpoints/api-endpoints";
 
 export class RegisterApi extends BaseApi {
@@ -7,21 +7,29 @@ export class RegisterApi extends BaseApi {
     super(request, ApiEndpoints.BASE_URL);
   }
   async registerUser(params: Record<string, string>) {
-    return this.postForm(ApiEndpoints.USERS.CREATE, params);
+    const response = await this.postForm(ApiEndpoints.USERS.CREATE, params);
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async updateUser(params: Record<string, string>) {
-    return this.putForm(ApiEndpoints.USERS.UPDATE, params);
+    const response = await this.putForm(ApiEndpoints.USERS.UPDATE, params);
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async deleteUser(email: string, password: string) {
-    return this.delete(ApiEndpoints.USERS.DELETE, {
+    const response = await this.delete(ApiEndpoints.USERS.DELETE, {
       email,
       password,
     });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async getUserDetailByEmail(email: string) {
-    return this.get(ApiEndpoints.USERS.DETAILS, { email });
+    const response = await this.get(ApiEndpoints.USERS.DETAILS, { email });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 }

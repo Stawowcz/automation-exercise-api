@@ -1,1 +1,1 @@
-export * from './brand-fields'
+export * from "./brand-fields";

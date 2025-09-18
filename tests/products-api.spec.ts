@@ -82,6 +82,8 @@ test.describe("Products API", () => {
     const body = await response.json();
 
     expect.soft(body.responseCode).toBe(400);
-    expect.soft(body.message).toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_PRODUCT_MISSING);
+    expect
+      .soft(body.message)
+      .toBe(REQUIRED_PRODUCT_FIELDS.SEARCH_PRODUCT_MISSING);
   });
 });

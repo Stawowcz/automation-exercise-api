@@ -1,1 +1,1 @@
-export * from './common-fields'
+export * from "./common-fields";

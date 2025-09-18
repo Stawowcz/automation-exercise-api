@@ -1,1 +1,1 @@
-export * from './category-fields'
+export * from "./category-fields";

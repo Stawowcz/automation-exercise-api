@@ -1,5 +1,5 @@
 import { BaseApi } from "./base-api";
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, expect } from "@playwright/test";
 import { ApiEndpoints } from "../constants/endpoints/api-endpoints";
 
 export class BrandsApi extends BaseApi {
@@ -8,10 +8,14 @@ export class BrandsApi extends BaseApi {
   }
 
   async getAllBrands() {
-    return this.get(ApiEndpoints.BRANDS.LIST);
+    const response = await this.get(ApiEndpoints.BRANDS.LIST);
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 
   async postBrand() {
-    return this.post(ApiEndpoints.BRANDS.LIST, { data: {} });
+    const response = await this.post(ApiEndpoints.BRANDS.LIST, { data: {} });
+    expect(response.ok()).toBeTruthy();
+    return response;
   }
 }

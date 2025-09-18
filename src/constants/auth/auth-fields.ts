@@ -7,11 +7,11 @@ export const REQUIRED_AUTH_FIELDS = {
   // auth
   EMAIL_PASSWORD_MISSING:
     "Bad request, email or password parameter is missing in POST request.",
-  
+
   // auth
   USER_CREATED: "User created!",
 
-      // auth
+  // auth
   ACCOUNT_DELETED: "Account deleted!",
   // auth
   USER_UPDATED: "User updated!",
